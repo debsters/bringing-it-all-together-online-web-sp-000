@@ -20,10 +20,7 @@ class Dog
   end
 
   def self.drop_table
-    sql = <<-SQL
-    DROP TABLE IF EXISTS dogs
-    SQL
-
+    sql = "DROP TABLE IF EXISTS dogs;"
     DB[:conn].execute(sql)
   end
 
@@ -32,11 +29,11 @@ class Dog
         self.update
     else
         sql = <<-SQL
-          INSERT INTO songs (name, album)
+          INSERT INTO dogs (name, breed)
           VALUES (?, ?)
         SQL
-        DB[:conn].execute(sql, self.name, self.album)
-        @id = DB[:conn].execute("SELECT last_insert_rowid() FROM songs")[0][0]
+        DB[:conn].execute(sql, self.name, self.breed)
+        @id = DB[:conn].execute("SELECT last_insert_rowid() FROM dogs")[0][0]
     end
   end
 
